@@ -92,6 +92,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Conectar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConectarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSinc">
           <Properties>
@@ -195,11 +198,11 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="50" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="btnLimpar" max="32767" attributes="0"/>
                       <Component id="btnPesquisar" max="32767" attributes="0"/>
-                      <Component id="btnImprimir" max="32767" attributes="0"/>
+                      <Component id="btnPDF" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -252,7 +255,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnImprimir" min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="btnPDF" min="-2" pref="44" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblNome" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -396,9 +399,9 @@
             <Property name="text" type="java.lang.String" value="Estados de Ocorr&#xea;ncia"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnImprimir">
+        <Component class="javax.swing.JButton" name="btnPDF">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Imprimir"/>
+            <Property name="text" type="java.lang.String" value="Exportar para PDF"/>
           </Properties>
         </Component>
       </SubComponents>

@@ -5,6 +5,10 @@
  */
 package com.mycompany.aps;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import static com.mycompany.aps.Conexao.IniciarConexao;
+
 /**
  *
  * @author Felipe
@@ -15,7 +19,8 @@ public class Janela extends javax.swing.JFrame {
      * Creates new form janela
      */
     public Janela() {
-        initComponents();
+        initComponents();        
+        
     }
 
     /**
@@ -52,7 +57,7 @@ public class Janela extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtUf = new javax.swing.JTextField();
         lblUf = new javax.swing.JLabel();
-        btnImprimir = new javax.swing.JButton();
+        btnPDF = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -63,6 +68,11 @@ public class Janela extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         btnConectar.setText("Conectar");
+        btnConectar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConectarActionPerformed(evt);
+            }
+        });
 
         btnSinc.setText("Sincronizar Dados");
 
@@ -139,7 +149,7 @@ public class Janela extends javax.swing.JFrame {
 
         lblUf.setText("Estados de Ocorrência");
 
-        btnImprimir.setText("Imprimir");
+        btnPDF.setText("Exportar para PDF");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -196,11 +206,11 @@ public class Janela extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(4, 4, 4)
                                 .addComponent(lblUf)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPDF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(15, 15, 15))
         );
         jPanel2Layout.setVerticalGroup(
@@ -240,7 +250,7 @@ public class Janela extends javax.swing.JFrame {
                             .addComponent(txtPrinAmeaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -312,6 +322,12 @@ public class Janela extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnFecharActionPerformed
 
+    private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
+        // TODO add your handling code here:
+        IniciarConexao();
+        
+    }//GEN-LAST:event_btnConectarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -351,8 +367,8 @@ public class Janela extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConectar;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnLimpar;
+    private javax.swing.JButton btnPDF;
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnSinc;
     private javax.swing.JComboBox<String> cbFamilia;
