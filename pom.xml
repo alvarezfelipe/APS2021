@@ -28,6 +28,21 @@
             <artifactId>firebase-admin</artifactId>
             <version>7.1.1</version>
         </dependency>
-        
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+            <type>jar</type>
+        </dependency> 
+        <dependency>
+            <groupId>org.simpleflatmapper</groupId>
+            <artifactId>simpleFlatMapper</artifactId>
+            <version>1.10.3</version>                
+        </dependency>   
+        <dependency>
+            <groupId>org.simpleflatmapper</groupId>
+            <artifactId>sfm-csv</artifactId>
+            <version>8.2.3</version>                
+        </dependency> 
     </dependencies>
 </project>

@@ -6,7 +6,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        IniciarConexao();
+        //IniciarConexao();
 
         new Janela().setVisible(true);
     }
