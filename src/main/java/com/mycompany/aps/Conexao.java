@@ -1,6 +1,7 @@
 package com.mycompany.aps;
 
 import com.google.auth.oauth2.GoogleCredentials;
+import javax.swing.JOptionPane;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 
 
@@ -19,6 +20,8 @@ public class Conexao {
     public static void IniciarConexao() {
         String dataBase = "https://aps2021especies-default-rtdb.firebaseio.com";
         FileInputStream refreshToken = null;
+        
+        
         try {
             refreshToken = new FileInputStream("serviceAccount.json");
             FirebaseOptions options = FirebaseOptions.builder()
@@ -39,8 +42,6 @@ public class Conexao {
                 Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+         
     }
-
-       
-    
 }
