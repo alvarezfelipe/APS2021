@@ -8,20 +8,17 @@ import com.google.firebase.FirebaseOptions;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.UUID;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-
-
 
 public class Conexao {
 
     public static void IniciarConexao() {
         String dataBase = "https://aps2021especies-default-rtdb.firebaseio.com";
         FileInputStream refreshToken = null;
-        
-        
+
         try {
             refreshToken = new FileInputStream("serviceAccount.json");
             FirebaseOptions options = FirebaseOptions.builder()
@@ -42,6 +39,9 @@ public class Conexao {
                 Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-         
+    }
+
+    public static String generateUUID() {
+        return UUID.randomUUID().toString();
     }
 }

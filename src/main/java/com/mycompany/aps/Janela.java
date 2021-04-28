@@ -5,9 +5,17 @@
  */
 package com.mycompany.aps;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.internal.NonNull;
 import static com.mycompany.aps.Conexao.IniciarConexao;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -15,12 +23,18 @@ import static com.mycompany.aps.Conexao.IniciarConexao;
  */
 public class Janela extends javax.swing.JFrame {
 
+    //private DatabaseReference especiesRef = FirebaseDatabase.getInstance().getReference().child("especies");
+    private String colunas[] = {"Espécie", "Nome Comum", "Fauna/Flora", "Grupo", "Família", "Categoria de Ameaça", "Sigla Categoria de Ameaça"};
+    private ArrayList<Model> lista = new ArrayList<Model>();
+    private TableConsultas tabela;
+
     /**
      * Creates new form janela
      */
     public Janela() {
-        initComponents();        
-        
+
+        initComponents();
+
     }
 
     /**
@@ -109,13 +123,13 @@ public class Janela extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções de Pesquisa"));
 
-        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fauna", "Flora" }));
+        cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Fauna", "Flora" }));
 
         lblTipo.setText("Fauna/Flora");
 
-        cbGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item1", "Item2", "Item3", "Item4" }));
+        cbGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Item1", "Item2", "Item3", "Item4" }));
 
-        cbFamilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fauna", "Flora" }));
+        cbFamilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Fauna", "Flora" }));
 
         lblGrupo.setText("Grupo");
 
@@ -126,8 +140,18 @@ public class Janela extends javax.swing.JFrame {
         txtEspecie.setText("jTextField1");
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         lblBioma.setText("Bioma");
 
@@ -324,10 +348,98 @@ public class Janela extends javax.swing.JFrame {
 
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         // TODO add your handling code here:
-        IniciarConexao();
-        
+        try {
+            IniciarConexao();
+        } catch (Exception e) {
+
+        }
     }//GEN-LAST:event_btnConectarActionPerformed
 
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        // TODO add your handling code here:
+        jTable1.setVisible(true);
+        String dado = (String) cbTipo.getSelectedItem();
+        System.out.println(dado);
+        FiltroTipo(dado);
+    }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        // TODO add your handling code here:
+        cbFamilia.setSelectedIndex(0);
+        cbGrupo.setSelectedIndex(0);;
+        cbTipo.setSelectedIndex(0);;
+        txtBioma.setText("");
+        txtCatAmeaca.setText("");
+        txtEspecie.setText("");
+        txtNome.setText("");
+        txtPrinAmeaca.setText("");
+        txtUf.setText("");
+        jTable1.setVisible(false);
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void FiltroTipo(String valor) {
+        if (valor != "Select") {
+            try {
+                Query especiesReffilter = FirebaseDatabase.getInstance().getReference().child("especies").
+                        orderByChild("faunaFlora").equalTo(valor);
+
+                especiesReffilter.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        lista.clear();
+
+                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                            Model dados = ds.getValue(Model.class);
+
+                            lista.add(dados);
+
+                        }
+                        tabela = new TableConsultas(lista, colunas);
+                        jTable1.setModel(tabela);
+                        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError e) {
+                        JOptionPane.showMessageDialog(null, "Consulta Cancelada \n" + e.getMessage());
+
+                    }
+                });
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
+            }
+        } else {
+            //filtroEspecie();
+        }
+    }
+
+//    private void filtroEspecie() {
+//        try {
+//            especiesRef.addValueEventListener(new ValueEventListener() {
+//
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    lista.clear();
+//
+//                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+//                        Model dados = ds.getValue(Model.class);
+//                        lista.add(dados);
+//                    }
+//                    tabela = new TableConsultas(lista, colunas);
+//                    jTable1.setModel(tabela);
+//                    jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//                }
+//
+//                @Override
+//                public void onCancelled(DatabaseError e) {
+//                    JOptionPane.showMessageDialog(null, "Consulta Cancelada \n" + e.getMessage());
+//                }
+//            });
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
+//        }
+//    }
     /**
      * @param args the command line arguments
      */
