@@ -12,11 +12,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.internal.NonNull;
-import static com.mycompany.aps.Conexao.IniciarConexao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
-
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -136,7 +134,12 @@ public class Janela extends javax.swing.JFrame {
 
         lblTipo.setText("Fauna/Flora");
 
-        cbGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Item1", "Item2", "Item3", "Item4" }));
+        cbGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Anfíbios", "Angiospermas", "Aves", "Briófitas", "Gimnospermas", "Invertebrados Aquáticos", "Invertebrados Terrestres", "Mamíferos", "Peixes Continentais", "Peixes Marinhos", "Pteridófitas", "Répteis" }));
+        cbGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbGrupoActionPerformed(evt);
+            }
+        });
 
         cbFamilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Fauna", "Flora" }));
 
@@ -357,20 +360,14 @@ public class Janela extends javax.swing.JFrame {
 
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         // TODO add your handling code here:
-//        try {
-//            IniciarConexao();
-//        } catch (Exception e) {
-//
-//        }
-        JOptionPane.showMessageDialog(null, "Conectado com sucesso");
+        JOptionPane.showMessageDialog(null, "Conectado com sucesso ao Banco de Dados!");
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-//        jTable1.setVisible(true);
-//        String dado = (String) cbTipo.getSelectedItem();
-//        System.out.println(dado);
-//        FiltroTipo(dado);
+        jTable1.setVisible(true);
+        String dado = (String) cbTipo.getSelectedItem();        
+        FiltroTipo(dado);
         //CsvJson csv = new CsvJson();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -395,9 +392,13 @@ public class Janela extends javax.swing.JFrame {
             csv.csvJson();
         } catch (MalformedURLException ex) {
             Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+        }        
     }//GEN-LAST:event_btnSincActionPerformed
+
+    private void cbGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGrupoActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cbGrupoActionPerformed
 
     private void FiltroTipo(String valor) {
         if (valor != "Select") {
@@ -412,31 +413,27 @@ public class Janela extends javax.swing.JFrame {
 
                         for (DataSnapshot ds : dataSnapshot.getChildren()) {
                             Model dados = ds.getValue(Model.class);
-
                             lista.add(dados);
-
                         }
                         tabela = new TableConsultas(lista, colunas);
                         jTable1.setModel(tabela);
                         jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
                     }
 
                     @Override
                     public void onCancelled(DatabaseError e) {
                         JOptionPane.showMessageDialog(null, "Consulta Cancelada \n" + e.getMessage());
-
                     }
                 });
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
             }
         } else {
-            filtroEspecie();
+            filtroTudo();
         }
     }
 
-    private void filtroEspecie() {
+    private void filtroTudo() {
         try {
             especiesRef.addValueEventListener(new ValueEventListener() {
 
