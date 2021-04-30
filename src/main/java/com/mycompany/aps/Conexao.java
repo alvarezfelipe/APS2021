@@ -26,8 +26,7 @@ public class Conexao {
                     .setDatabaseUrl(dataBase)
                     .build();
 
-            FirebaseApp.initializeApp(options);
-            JOptionPane.showMessageDialog(null, "Conectado com sucesso");
+            FirebaseApp.initializeApp(options);            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

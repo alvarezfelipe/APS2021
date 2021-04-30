@@ -17,13 +17,17 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 
+import java.net.MalformedURLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Felipe
  */
 public class Janela extends javax.swing.JFrame {
 
-    //private DatabaseReference especiesRef = FirebaseDatabase.getInstance().getReference().child("especies");
+    private DatabaseReference especiesRef;
     private String colunas[] = {"Espécie", "Nome Comum", "Fauna/Flora", "Grupo", "Família", "Categoria de Ameaça", "Sigla Categoria de Ameaça"};
     private ArrayList<Model> lista = new ArrayList<Model>();
     private TableConsultas tabela;
@@ -32,7 +36,7 @@ public class Janela extends javax.swing.JFrame {
      * Creates new form janela
      */
     public Janela() {
-
+        this.especiesRef = FirebaseDatabase.getInstance().getReference().child("base");
         initComponents();
 
     }
@@ -89,6 +93,11 @@ public class Janela extends javax.swing.JFrame {
         });
 
         btnSinc.setText("Sincronizar Dados");
+        btnSinc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSincActionPerformed(evt);
+            }
+        });
 
         btnFechar.setText("Fechar");
         btnFechar.addActionListener(new java.awt.event.ActionListener() {
@@ -348,19 +357,21 @@ public class Janela extends javax.swing.JFrame {
 
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         // TODO add your handling code here:
-        try {
-            IniciarConexao();
-        } catch (Exception e) {
-
-        }
+//        try {
+//            IniciarConexao();
+//        } catch (Exception e) {
+//
+//        }
+        JOptionPane.showMessageDialog(null, "Conectado com sucesso");
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
-        jTable1.setVisible(true);
-        String dado = (String) cbTipo.getSelectedItem();
-        System.out.println(dado);
-        FiltroTipo(dado);
+//        jTable1.setVisible(true);
+//        String dado = (String) cbTipo.getSelectedItem();
+//        System.out.println(dado);
+//        FiltroTipo(dado);
+        //CsvJson csv = new CsvJson();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -377,10 +388,21 @@ public class Janela extends javax.swing.JFrame {
         jTable1.setVisible(false);
     }//GEN-LAST:event_btnLimparActionPerformed
 
+    private void btnSincActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSincActionPerformed
+        // TODO add your handling code here:
+        CsvJson csv = new CsvJson();
+        try {
+            csv.csvJson();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+    }//GEN-LAST:event_btnSincActionPerformed
+
     private void FiltroTipo(String valor) {
         if (valor != "Select") {
             try {
-                Query especiesReffilter = FirebaseDatabase.getInstance().getReference().child("especies").
+                Query especiesReffilter = FirebaseDatabase.getInstance().getReference().child("base").
                         orderByChild("faunaFlora").equalTo(valor);
 
                 especiesReffilter.addValueEventListener(new ValueEventListener() {
@@ -410,36 +432,37 @@ public class Janela extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
             }
         } else {
-            //filtroEspecie();
+            filtroEspecie();
         }
     }
 
-//    private void filtroEspecie() {
-//        try {
-//            especiesRef.addValueEventListener(new ValueEventListener() {
-//
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                    lista.clear();
-//
-//                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                        Model dados = ds.getValue(Model.class);
-//                        lista.add(dados);
-//                    }
-//                    tabela = new TableConsultas(lista, colunas);
-//                    jTable1.setModel(tabela);
-//                    jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-//                }
-//
-//                @Override
-//                public void onCancelled(DatabaseError e) {
-//                    JOptionPane.showMessageDialog(null, "Consulta Cancelada \n" + e.getMessage());
-//                }
-//            });
-//        } catch (Exception e) {
-//            JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
-//        }
-//    }
+    private void filtroEspecie() {
+        try {
+            especiesRef.addValueEventListener(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    lista.clear();
+
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        Model dados = ds.getValue(Model.class);
+                        lista.add(dados);
+                    }
+                    tabela = new TableConsultas(lista, colunas);
+                    jTable1.setModel(tabela);
+                    jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError e) {
+                    JOptionPane.showMessageDialog(null, "Consulta Cancelada \n" + e.getMessage());
+                }
+            });
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
+        }
+    }
+
     /**
      * @param args the command line arguments
      */

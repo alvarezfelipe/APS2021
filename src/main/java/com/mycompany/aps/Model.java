@@ -18,214 +18,108 @@ public class Model {
     private String especieExclusiva;
     private String estado;
 
-    /**
-     * @return the faunaFlora
-     */
-    public String getFaunaFlora() {
+    public String getFaunaFlora(){
         return faunaFlora;
     }
-
-    /**
-     * @param faunaFlora the faunaFlora to set
-     */
-    public void setFaunaFlora(String faunaFlora) {
+    public void setFaunaFlora(String faunaFlora){
         this.faunaFlora = faunaFlora;
     }
-
-    /**
-     * @return the grupo
-     */
-    public String getGrupo() {
+    
+    public String getGrupo(){
         return grupo;
     }
-
-    /**
-     * @param grupo the grupo to set
-     */
-    public void setGrupo(String grupo) {
+    public void setGrupo(String grupo){
         this.grupo = grupo;
     }
-
-    /**
-     * @return the familia
-     */
-    public String getFamilia() {
+    
+    public String getFamilia(){
         return familia;
     }
-
-    /**
-     * @param familia the familia to set
-     */
-    public void setFamilia(String familia) {
+    public void setFamilia(String familia){
         this.familia = familia;
     }
-
-    /**
-     * @return the especie
-     */
-    public String getEspecie() {
+    
+    public String getEspecie(){
         return especie;
     }
-
-    /**
-     * @param especie the especie to set
-     */
-    public void setEspecie(String especie) {
+    public void setEspecie(String especie){
         this.especie = especie;
     }
-
-    /**
-     * @return the nomeComum
-     */
-    public String getNomeComum() {
+    
+    public String getNomeComum(){
         return nomeComum;
     }
-
-    /**
-     * @param nomeComum the nomeComum to set
-     */
-    public void setNomeComum(String nomeComum) {
+    public void setNomeComum(String nomeComum){
         this.nomeComum = nomeComum;
     }
-
-    /**
-     * @return the catAmeaca
-     */
-    public String getCatAmeaca() {
+    
+    public String getCatAmeaca(){
         return catAmeaca;
     }
-
-    /**
-     * @param catAmeaca the catAmeaca to set
-     */
-    public void setCatAmeaca(String catAmeaca) {
+    public void setCatAmeaca(String catAmeaca){
         this.catAmeaca = catAmeaca;
     }
-
-    /**
-     * @return the siglaCatAmeaca
-     */
-    public String getSiglaCatAmeaca() {
+    
+    public String getSiglaCatAmeaca(){
         return siglaCatAmeaca;
     }
-
-    /**
-     * @param siglaCatAmeaca the siglaCatAmeaca to set
-     */
-    public void setSiglaCatAmeaca(String siglaCatAmeaca) {
+    public void setSiglaCatAmeaca(String siglaCatAmeaca){
         this.siglaCatAmeaca = siglaCatAmeaca;
     }
-
-    /**
-     * @return the bioma
-     */
-    public String getBioma() {
+    
+    public String getBioma(){
         return bioma;
     }
-
-    /**
-     * @param bioma the bioma to set
-     */
-    public void setBioma(String bioma) {
+    public void setBioma(String bioma){
         this.bioma = bioma;
     }
-
-    /**
-     * @return the princAmeaca
-     */
-    public String getPrincAmeaca() {
+    
+    public String getPrincAmeaca(){
         return princAmeaca;
     }
-
-    /**
-     * @param princAmeaca the princAmeaca to set
-     */
-    public void setPrincAmeaca(String princAmeaca) {
+    public void setPrincAmeaca(String princAmeaca){
         this.princAmeaca = princAmeaca;
     }
-
-    /**
-     * @return the areaProtegida
-     */
-    public String getAreaProtegida() {
+    
+    public String getAreaProtegida(){
         return areaProtegida;
     }
-
-    /**
-     * @param areaProtegida the areaProtegida to set
-     */
-    public void setAreaProtegida(String areaProtegida) {
+    public void setAreaProtegida(String areaProtegida){
         this.areaProtegida = areaProtegida;
     }
-
-    /**
-     * @return the panConversacao
-     */
-    public String getPanConversacao() {
+    
+    public String getPanConversacao(){
         return panConversacao;
     }
-
-    /**
-     * @param panConversacao the panConversacao to set
-     */
-    public void setPanConversacao(String panConversacao) {
+    public void setPanConversacao(String panConversacao){
         this.panConversacao = panConversacao;
     }
-
-    /**
-     * @return the ordPesqueiro
-     */
-    public String getOrdPesqueiro() {
+    
+    public String getOrdPesqueiro(){
         return ordPesqueiro;
     }
-
-    /**
-     * @param ordPesqueiro the ordPesqueiro to set
-     */
-    public void setOrdPesqueiro(String ordPesqueiro) {
+    public void setOrdPesqueiro(String ordPesqueiro){
         this.ordPesqueiro = ordPesqueiro;
     }
-
-    /**
-     * @return the nivelProtecao
-     */
-    public String getNivelProtecao() {
+    
+    public String getNivelProtecao(){
         return nivelProtecao;
     }
-
-    /**
-     * @param nivelProtecao the nivelProtecao to set
-     */
-    public void setNivelProtecao(String nivelProtecao) {
+    public void setNivelProtecao(String nivelProtecao){
         this.nivelProtecao = nivelProtecao;
     }
-
-    /**
-     * @return the especieExclusiva
-     */
-    public String getEspecieExclusiva() {
+    
+    public String getEspecieExclusiva(){
         return especieExclusiva;
     }
-
-    /**
-     * @param especieExclusiva the especieExclusiva to set
-     */
-    public void setEspecieExclusiva(String especieExclusiva) {
-        this.especieExclusiva = especieExclusiva;
+    public void setEspecieExclusiva(String especieExcluvisa){
+        this.especieExclusiva = especieExcluvisa;
     }
-
-    /**
-     * @return the estado
-     */
-    public String getEstado() {
+    
+    public String getEstado(){
         return estado;
     }
-
-    /**
-     * @param estado the estado to set
-     */
-    public void setEstado(String estado) {
+    public void setEstado(String estado){
         this.estado = estado;
     }
-
 }
