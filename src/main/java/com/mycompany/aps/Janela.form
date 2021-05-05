@@ -286,6 +286,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cbTipoFocusLost"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -298,25 +301,11 @@
         <Component class="javax.swing.JComboBox" name="cbGrupo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="13">
-                <StringItem index="0" value="Selecione"/>
-                <StringItem index="1" value="Anf&#xed;bios"/>
-                <StringItem index="2" value="Angiospermas"/>
-                <StringItem index="3" value="Aves"/>
-                <StringItem index="4" value="Bri&#xf3;fitas"/>
-                <StringItem index="5" value="Gimnospermas"/>
-                <StringItem index="6" value="Invertebrados Aqu&#xe1;ticos"/>
-                <StringItem index="7" value="Invertebrados Terrestres"/>
-                <StringItem index="8" value="Mam&#xed;feros"/>
-                <StringItem index="9" value="Peixes Continentais"/>
-                <StringItem index="10" value="Peixes Marinhos"/>
-                <StringItem index="11" value="Pterid&#xf3;fitas"/>
-                <StringItem index="12" value="R&#xe9;pteis"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbGrupoActionPerformed"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cbGrupoFocusLost"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -325,11 +314,7 @@
         <Component class="javax.swing.JComboBox" name="cbFamilia">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Selecione"/>
-                <StringItem index="1" value="Fauna"/>
-                <StringItem index="2" value="Flora"/>
-              </StringArray>
+              <StringArray count="0"/>
             </Property>
           </Properties>
           <AuxValues>
@@ -352,9 +337,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEspecie">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnPesquisar">
           <Properties>
@@ -378,9 +360,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBioma">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCatAmeaca">
           <Properties>
@@ -388,14 +367,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtCatAmeaca">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPrinAmeaca">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblPrinAmeaca">
           <Properties>
@@ -408,14 +381,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtNome">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtUf">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblUf">
           <Properties>

@@ -29,6 +29,7 @@ public class Janela extends javax.swing.JFrame {
     private String colunas[] = {"Espécie", "Nome Comum", "Fauna/Flora", "Grupo", "Família", "Categoria de Ameaça", "Sigla Categoria de Ameaça"};
     private ArrayList<Model> lista = new ArrayList<Model>();
     private TableConsultas tabela;
+    private ArrayList<String> pesquisa = new ArrayList<String>();
 
     /**
      * Creates new form janela
@@ -131,25 +132,25 @@ public class Janela extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções de Pesquisa"));
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Fauna", "Flora" }));
-
-        lblTipo.setText("Fauna/Flora");
-
-        cbGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Anfíbios", "Angiospermas", "Aves", "Briófitas", "Gimnospermas", "Invertebrados Aquáticos", "Invertebrados Terrestres", "Mamíferos", "Peixes Continentais", "Peixes Marinhos", "Pteridófitas", "Répteis" }));
-        cbGrupo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbGrupoActionPerformed(evt);
+        cbTipo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbTipoFocusLost(evt);
             }
         });
 
-        cbFamilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Fauna", "Flora" }));
+        lblTipo.setText("Fauna/Flora");
+
+        cbGrupo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbGrupoFocusLost(evt);
+            }
+        });
 
         lblGrupo.setText("Grupo");
 
         lblFamilia.setText("Família");
 
         lblEspecie.setText("Espécie");
-
-        txtEspecie.setText("jTextField1");
 
         btnPesquisar.setText("Pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -167,21 +168,11 @@ public class Janela extends javax.swing.JFrame {
 
         lblBioma.setText("Bioma");
 
-        txtBioma.setText("jTextField1");
-
         lblCatAmeaca.setText("Categoria da Ameaça");
-
-        txtCatAmeaca.setText("jTextField1");
-
-        txtPrinAmeaca.setText("jTextField1");
 
         lblPrinAmeaca.setText("Principais Ameaças");
 
         lblNome.setText("Nome Comum");
-
-        txtNome.setText("jTextField1");
-
-        txtUf.setText("jTextField1");
 
         lblUf.setText("Estados de Ocorrência");
 
@@ -374,8 +365,8 @@ public class Janela extends javax.swing.JFrame {
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // TODO add your handling code here:
         cbFamilia.setSelectedIndex(0);
-        cbGrupo.setSelectedIndex(0);;
-        cbTipo.setSelectedIndex(0);;
+        cbGrupo.setSelectedIndex(0);
+        cbTipo.setSelectedIndex(0);
         txtBioma.setText("");
         txtCatAmeaca.setText("");
         txtEspecie.setText("");
@@ -395,11 +386,51 @@ public class Janela extends javax.swing.JFrame {
         }        
     }//GEN-LAST:event_btnSincActionPerformed
 
-    private void cbGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbGrupoActionPerformed
+    private void cbTipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbTipoFocusLost
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbGrupoActionPerformed
+        EscolheGrupo();
+    }//GEN-LAST:event_cbTipoFocusLost
 
+    private void cbGrupoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbGrupoFocusLost
+        // TODO add your handling code here:
+        //EscolheFamilia();
+    }//GEN-LAST:event_cbGrupoFocusLost
+    
+    private void EscolheGrupo(){        
+        String dado = (String) cbTipo.getSelectedItem();
+        cbGrupo.removeAllItems();
+        cbGrupo.addItem("Selecione");
+        cbFamilia.addItem("Selecione");
+        if (dado.toLowerCase().equals("fauna")){
+            cbGrupo.addItem("Aves");
+            cbGrupo.addItem("Invertebrados Terrestres");
+            cbGrupo.addItem("Peixes Marinhos");
+            cbGrupo.addItem("Anfíbios");
+            cbGrupo.addItem("Invertebrados Aquáticos");
+            cbGrupo.addItem("Peixes Continentais");
+            cbGrupo.addItem("Mamíferos");
+            cbGrupo.addItem("Répteis");
+        } else if (dado.toLowerCase().equals("flora")){
+            cbGrupo.addItem("Angiospermas");
+            cbGrupo.addItem("Pteridófitas");
+            cbGrupo.addItem("Gimnospermas");
+            cbGrupo.addItem("Briófitas");
+        }
+        
+//        for (int i = 0; i < lista.size();i++){
+//            cbGrupo.addItem(lista.get(i).getGrupo());
+//        }
+    }
+//    private void EscolheFamilia(){
+//        String dado = (String) cbGrupo.getSelectedItem();
+//        cbFamilia.removeAllItems();
+//        
+//        switch (dado.toLowerCase()){
+//            case "briófitas":
+//                cbFamilia.addItem("Arnelli");
+//        }
+//    }
+    
     private void FiltroTipo(String valor) {
         if (valor != "Select") {
             try {
