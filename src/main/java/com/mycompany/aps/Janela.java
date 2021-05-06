@@ -28,8 +28,8 @@ public class Janela extends javax.swing.JFrame {
     private DatabaseReference especiesRef;
     private String colunas[] = {"Espécie", "Nome Comum", "Fauna/Flora", "Grupo", "Família", "Categoria de Ameaça", "Sigla Categoria de Ameaça"};
     private ArrayList<Model> lista = new ArrayList<Model>();
+    private ArrayList<Model> pesquisaLista = new ArrayList<Model>();
     private TableConsultas tabela;
-    private ArrayList<String> pesquisa = new ArrayList<String>();
 
     /**
      * Creates new form janela
@@ -72,9 +72,9 @@ public class Janela extends javax.swing.JFrame {
         lblPrinAmeaca = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        txtUf = new javax.swing.JTextField();
         lblUf = new javax.swing.JLabel();
         btnPDF = new javax.swing.JButton();
+        cbUf = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -132,19 +132,12 @@ public class Janela extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Opções de Pesquisa"));
 
         cbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Fauna", "Flora" }));
-        cbTipo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cbTipoFocusLost(evt);
-            }
-        });
 
         lblTipo.setText("Fauna/Flora");
 
-        cbGrupo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cbGrupoFocusLost(evt);
-            }
-        });
+        cbGrupo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Anfíbios", "Angiospermas", "Aves", "Briófitas", "Gimnospermas", "Invertebrados Aquáticos", "Invertebrados Terrestres", "Mamíferos", "Peixes Continentais", "Peixes Marinhos", "Pteridófitas", "Répteis", " " }));
+
+        cbFamilia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Acanthaceae", "Accipitridae", "Achiridae", "Actiniidae", "Aeglidae", "Aeshnidae", "Alismataceae", "Alopiidae", "Alstroemeriaceae", "Amaranthaceae", "Amaryllidaceae", "Amphisbanidae", "Ampullariidae", "Anablepidae", "Anacardiaceae", "Anatidae", "Andrenidae", "Anemiaceae", "Annonaceae", "Anostomidae", "Apiaceae", "Apidae", "Apocynaceae", "Apteronotidae", "Aquifoliaceae", "Araceae", "Araliaceae", "Araucariaceae", "Ardeidae", "Arecaceae", "Arhynchobatidae", "Ariidae", "Aristolochiaceae", "Arnelliaceae", "Aromobatidae", "Arrhopalitidae", "Aspleniaceae", "Asteraceae", "Asteriidae", "Astropectinidae", "Atelidae", "Atherinopsidae", "Baetidae", "Balaenidae", "Balaenopteridae", "Batrachoididae", "Begoniaceae", "Berberidaceae", "Bignoniaceae", "Blechnaceae", "Bochicidae", "Boidae", "Bouchardiidae", "Brachycephalidae", "Bradypodidae", "Bromeliaceae", "Bruchiaceae", "Bucconidae", "Bufonidae", "Bulimulidae", "Burseraceae", "Buthidae", "Cactaceae", "Callichthyidae", "Callitrichidae", "Calophyllaceae", "Calyceraceae", "Campanulaceae", "Canidae", "Capitonidae", "Caprifoliaceae", "Caprimulgidae", "Carabidae", "Carcharhinidae", "Cardinalidae", "Cassidulidae", "Caviidae", "Cebidae", "Celastraceae", "Cervidae", "Cetorhinidae", "Chactidae", "Chaetodontidae", "Characidae", "Charadriidae", "Charinidae", "Chelidae", "Chelodesmidae", "Cheloniidae", "Chernetidae", "Chrysobalanaceae", "Chthoniidae", "Cichlidae", "Ciidae", "Cistaceae", "Clusiaceae", "Coenagrionidae", "Columbidae", "Combretaceae", "Commelinaceae", "Connaraceae", "Conopophagidae", "Convolvulaceae", "Corinnidae", "Corvidae", "Cotingidae", "Cracidae", "Crassulaceae", "Craugastoridae", "Crenuchidae", "Cricetidae", "Cryptodesmidae", "Cryptogeobiidae", "Cryptopidae", "Ctenidae", "Ctenomyidae", "Cuculidae", "Cyclanthaceae", "Cycloramphidae", "Cynodontidae", "Cyperaceae", "Dactyloidae", "Dasyatidae", "Dasypodidae", "Delphinidae", "Dendrocolaptidae", "Dermochelydae", "Dichapetalaceae", "Dicksoniaceae", "Dicranaceae", "Didelphidae", "Dilleniaceae", "Diomedeidae", "Dioscoreaceae", "Dipluridae", "Dipsadidae", "Dithrichaceae", "Doradidae", "Droseraceae", "Drymusidae", "Dryopteridaceae", "Dytiscidae", "Echimyidae", "Elaeocarpaceae", "Eleutherodactylidae", "Ephedraceae", "Epinephelidae", "Erethizontidae", "Ericaceae", "Eriocaulaceae", "Erythroxylaceae", "Escadabiidae", "Escalloniaceae", "Eukoeneniidae", "Eunicidae", "Euphorbiaceae", "Fabaceae", "Felidae", "Formicariidae", "Formicidae", "Fregatidae", "Fringilidae", "Furipteridae", "Furnariidae", "Gecarcinidae", "Gelsemiaceae", "Gentianaceae", "Gesneriaceae", "Ginglymostomatidae", "Glomerodesmidae", "Glossoscolecidae", "Gobiidae", "Gomphidae", "Gonyleptidae", "Grallariidae", "Gunneraceae", "Gymnophthalmidae", "Gymnuridae", "Halichondriidae", "Hedwigiaceae", "Heptapteridae", "Hesperiidae", "Heteragrionidae", "Hexanchidae", "Hubbardiidae", "Humiriaceae", "Hydrobiidae", "Hylidae", "Hylodidae", "Hymenophyllaceae", "Hypericaceae", "Hypogastruridae", "Hypopomidae", "Hyriidae", "Icteridae", "Ideoroncidae", "Iniidae", "Iridaceae", "Isoetaceae", "Isotomidae", "Istiophoridae", "Jungermanniaceae", "Labridae", "Labrisomidae", "Lamiaceae", "Lamnidae", "Lampyridae", "Latrunculiidae", "Lauraceae", "Lebiasinidae", "Lecythidaceae", "Leiosauridae", "Lejeuneaceae", "Lentibulariaceae", "Lepidoziaceae", "Leptodactylidae", "Leptophlebiidae", "Libellulidae", "Linaceae", "Liolaemidae", "Loasaceae", "Loganiaceae", "Loricariidae", "Lucanidae", "Luidiidae", "Lutjanidae", "Lycaenidae", "Lycidae", "Lycopodiaceae", "Lymnaeidae", "Lythraceae", "Mabuyidae", "Malacanthidae", "Malpighiaceae", "Malvaceae", "Marantaceae", "Marchantiaceae", "Marsileaceae", "Megalobulimidae", "Megalopidae", "Melastomataceae", "Meliaceae", "Metaniidae", "Metzgeriaceae", "Microdesmidae", "Microhylidae", "Milleporidae", "Mobulidae", "Momotidae", "Monimiaceae", "Moraceae", "Motacillidae", "Mussidae", "Mustelidae", "Mycetopodidae", "Myliobatidae", "Myristicaceae", "Myrmecophagidae", "Myrtaceae", "Myxinidae", "Natalidae", "Nyctibiidae", "Nymphalidae", "Ochnaceae", "Ochyroceratidae", "Odontaspididae", "Odontophoridae", "Odontophrynidae", "Odontostomidae", "Oleaceae", "Olividae", "Olpiidae", "Onuphidae", "Ophidiasteridae", "Ophidiidae", "Orchidaceae", "Oreasteridae", "Orobanchaceae", "Oxalidaceae", "Pallaviciniaceae", "Papilionidae", "Parodontidae", "Paronellidae", "Passerelidae", "Passifloraceae", "Pectinidae", "Pentaphylacaceae", "Peripatidae", "Phaethontidae", "Pholcidae", "Phyllanthaceae", "Phyllodactylidae", "Phyllostomidae", "Physeteridae", "Physidae", "Phytolaccaceae", "Picidae", "Picramniaceae", "Pieridae", "Pimelodidae", "Piperaceae", "Pipridae", "Pipritidae", "Pitheciidae", "Plagiochilaceae", "Planorbidae", "Plantaginaceae", "Platyrinchidae", "Plethodontidae", "Poaceae", "Podocarpaceae", "Podostemaceae", "Poeciliidae", "Polygalaceae", "Polypodiaceae", "Polyprionidae", "Pomacentridae", "Pomatiopsidae", "Pontoporiidae", "Portulacaceae", "Potamotrygonidae", "Pottiaceae", "Primulaceae", "Pristidae", "Procellariidae", "Prochilodontidae", "Prodidomidae", "Proteaceae", "Pseudopimelodidae", "Psittacidae", "Psophiidae", "Pteridaceae", "Pyralidae", "Pyrgodesmidae", "Quillajaceae", "Rallidae", "Ramphastidae", "Rhamnaceae", "Rhincodontidae", "Rhinobatidae", "Rhinocryptidae", "Rhynchocyclidae", "Ricciaceae", "Riodinidae", "Rivulidae", "Rubiaceae", "Rutaceae", "Salicaceae", "Salticidae", "Santalaceae", "Sapindaceae", "Sapotaceae", "Saturniidae", "Scarabaeidae", "Sciaenidae", "Scleruridae", "Scolopacidae", "Scolopendridae", "Scombridae", "Scorpaenidae", "Scrophulariaceae", "Selaginellaceae", "Serranidae", "Serrasalmidae", "Simaroubaceae", "Smilacaceae", "Sminthuridae", "Solanaceae", "Spengelidae", "Sphaerodactylidae", "Sphingidae", "Sphyrnidae", "Spirostreptidae", "Spongillidae", "Squalidae", "Squatinidae", "Sternidae", "Sternopygidae", "Streptaxidae", "Strigidae", "Strombidae", "Strophocheilidae", "Succineidae", "Sulidae", "Symplocaceae", "Synaptidae", "Syngnathidae", "Tapiriidae", "Tayassuidae", "Teiidae", "Thamnophilidae", "Thelypteridaceae", "Theraphosidae", "Thraupidae", "Tinamidae", "Tityridae", "Torpedinidae", "Toxopneustidae", "Triakidae", "Trichechidae", "Trichomycteridae", "Trigoniaceae", "Tripterygiidae", "Trochilidae", "Trogonidae", "Tropaeolaceae", "Tropidophiidae", "Tropiduridae", "Turdidae", "Typhlopidae", "Tyrannidae", "Urticaceae", "Velloziaceae", "Verbenaceae", "Vermetidae", "Veronicellidae", "Vesperidae", "Vespertilionidae", "Violaceae", "Viperidae", "Vireonidae", "Vitaceae", "Vochysiaceae", "Xenopidae", "Xyridaceae", "Zingiberaceae" }));
 
         lblGrupo.setText("Grupo");
 
@@ -177,6 +170,14 @@ public class Janela extends javax.swing.JFrame {
         lblUf.setText("Estados de Ocorrência");
 
         btnPDF.setText("Exportar para PDF");
+        btnPDF.setEnabled(false);
+
+        cbUf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+        cbUf.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                cbUfFocusLost(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -227,12 +228,10 @@ public class Janela extends javax.swing.JFrame {
                                 .addGap(4, 4, 4)
                                 .addComponent(lblNome))
                             .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(37, 37, 37)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(lblUf)))))
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblUf)
+                            .addComponent(cbUf, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,7 +243,7 @@ public class Janela extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblTipo)
@@ -257,8 +256,8 @@ public class Janela extends javax.swing.JFrame {
                             .addComponent(cbGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cbFamilia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtEspecie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -281,11 +280,10 @@ public class Janela extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblNome)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblUf)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbUf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblUf))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -352,14 +350,16 @@ public class Janela extends javax.swing.JFrame {
     private void btnConectarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConectarActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Conectado com sucesso ao Banco de Dados!");
+        jTable1.setVisible(true);
+        filtroTudo();
     }//GEN-LAST:event_btnConectarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
         jTable1.setVisible(true);
-        String dado = (String) cbTipo.getSelectedItem();        
-        FiltroTipo(dado);
-        //CsvJson csv = new CsvJson();
+        String dado = (String) cbTipo.getSelectedItem();
+        filtroTipo(dado);
+
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
@@ -372,7 +372,7 @@ public class Janela extends javax.swing.JFrame {
         txtEspecie.setText("");
         txtNome.setText("");
         txtPrinAmeaca.setText("");
-        txtUf.setText("");
+        cbUf.setSelectedItem(0);
         jTable1.setVisible(false);
     }//GEN-LAST:event_btnLimparActionPerformed
 
@@ -383,56 +383,15 @@ public class Janela extends javax.swing.JFrame {
             csv.csvJson();
         } catch (MalformedURLException ex) {
             Logger.getLogger(Janela.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
     }//GEN-LAST:event_btnSincActionPerformed
 
-    private void cbTipoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbTipoFocusLost
+    private void cbUfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbUfFocusLost
         // TODO add your handling code here:
-        EscolheGrupo();
-    }//GEN-LAST:event_cbTipoFocusLost
+    }//GEN-LAST:event_cbUfFocusLost
 
-    private void cbGrupoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbGrupoFocusLost
-        // TODO add your handling code here:
-        //EscolheFamilia();
-    }//GEN-LAST:event_cbGrupoFocusLost
-    
-    private void EscolheGrupo(){        
-        String dado = (String) cbTipo.getSelectedItem();
-        cbGrupo.removeAllItems();
-        cbGrupo.addItem("Selecione");
-        cbFamilia.addItem("Selecione");
-        if (dado.toLowerCase().equals("fauna")){
-            cbGrupo.addItem("Aves");
-            cbGrupo.addItem("Invertebrados Terrestres");
-            cbGrupo.addItem("Peixes Marinhos");
-            cbGrupo.addItem("Anfíbios");
-            cbGrupo.addItem("Invertebrados Aquáticos");
-            cbGrupo.addItem("Peixes Continentais");
-            cbGrupo.addItem("Mamíferos");
-            cbGrupo.addItem("Répteis");
-        } else if (dado.toLowerCase().equals("flora")){
-            cbGrupo.addItem("Angiospermas");
-            cbGrupo.addItem("Pteridófitas");
-            cbGrupo.addItem("Gimnospermas");
-            cbGrupo.addItem("Briófitas");
-        }
-        
-//        for (int i = 0; i < lista.size();i++){
-//            cbGrupo.addItem(lista.get(i).getGrupo());
-//        }
-    }
-//    private void EscolheFamilia(){
-//        String dado = (String) cbGrupo.getSelectedItem();
-//        cbFamilia.removeAllItems();
-//        
-//        switch (dado.toLowerCase()){
-//            case "briófitas":
-//                cbFamilia.addItem("Arnelli");
-//        }
-//    }
-    
-    private void FiltroTipo(String valor) {
-        if (valor != "Select") {
+    private void filtroTipo(String valor) {
+        if (valor != "Selecione") {
             try {
                 Query especiesReffilter = FirebaseDatabase.getInstance().getReference().child("base").
                         orderByChild("faunaFlora").equalTo(valor);
@@ -460,6 +419,7 @@ public class Janela extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
             }
         } else {
+            //filtrarConsultas();
             filtroTudo();
         }
     }
@@ -489,6 +449,59 @@ public class Janela extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
         }
+    }
+
+    private void filtrarConsultas() {
+        pesquisaLista.clear();
+        String bioma = txtBioma.getText().toLowerCase().trim();
+        String catAmeaca = txtCatAmeaca.getText().toLowerCase().trim();
+        String especie = txtEspecie.getText().toLowerCase().trim();
+        String nome = txtNome.getText().toLowerCase().trim();
+        String princAmeaca = txtPrinAmeaca.getText().toLowerCase().trim();
+
+        String faunaFlora = (String) cbTipo.getSelectedItem();
+        String grupo = (String) cbGrupo.getSelectedItem();
+        String familia = (String) cbFamilia.getSelectedItem();
+        String uf = (String) cbUf.getSelectedItem();
+        boolean teste = false;
+
+        for (int i = 0; i < lista.size(); i++) {
+            teste = false;
+            if (lista.get(i).getFaunaFlora().trim().toLowerCase().equals(faunaFlora)) {
+                teste = true;
+            }
+            if (lista.get(i).getGrupo().trim().toLowerCase().equals(grupo)) {
+                teste = true;
+            }
+            if (lista.get(i).getFamilia().trim().toLowerCase().equals(familia)) {
+                teste = true;
+            }
+            if (lista.get(i).getEspecie().trim().toLowerCase().equals(especie)) {
+                teste = true;
+            }
+            if (lista.get(i).getBioma().trim().toLowerCase().equals(bioma)) {
+                teste = true;
+            }
+            if (lista.get(i).getCatAmeaca().trim().toLowerCase().equals(catAmeaca)) {
+                teste = true;
+            }
+            if (lista.get(i).getPrincAmeaca().trim().toLowerCase().equals(princAmeaca)) {
+                teste = true;
+            }
+            if (lista.get(i).getNomeComum().trim().toLowerCase().equals(nome)) {
+                teste = true;
+            }
+            if (lista.get(i).getEstado().trim().toLowerCase().equals(uf)) {
+                teste = true;
+            }
+            if (teste) {
+                pesquisaLista.add(lista.get(i));
+            }
+        }
+
+        tabela = new TableConsultas(pesquisaLista, colunas);
+        jTable1.setModel(tabela);
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -537,6 +550,7 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbFamilia;
     private javax.swing.JComboBox<String> cbGrupo;
     private javax.swing.JComboBox<String> cbTipo;
+    private javax.swing.JComboBox<String> cbUf;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -556,6 +570,5 @@ public class Janela extends javax.swing.JFrame {
     private javax.swing.JTextField txtEspecie;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtPrinAmeaca;
-    private javax.swing.JTextField txtUf;
     // End of variables declaration//GEN-END:variables
 }

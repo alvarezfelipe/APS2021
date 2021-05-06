@@ -27,9 +27,9 @@ public class CsvJson {
         BufferedReader br;
 
         try {
-            String site = "http://dados.mma.gov.br/dataset/41a79b71-445f-4a6a-8c70-d46af991292a/resource/1f13b062-f3f6-4198-a4c5-3581548bebec/download/lista-de-especies-ameacas-2020.csv";
+            String dados = "http://dados.mma.gov.br/dataset/41a79b71-445f-4a6a-8c70-d46af991292a/resource/1f13b062-f3f6-4198-a4c5-3581548bebec/download/lista-de-especies-ameacas-2020.csv";
 
-            url = new URL(site);
+            url = new URL(dados);
             br = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
             CSVReader csv = new CSVReader(br, ';');
 
