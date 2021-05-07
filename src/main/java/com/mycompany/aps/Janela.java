@@ -357,8 +357,9 @@ public class Janela extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         // TODO add your handling code here:
         jTable1.setVisible(true);
-        String dado = (String) cbTipo.getSelectedItem();
-        filtroTipo(dado);
+//        String dado = (String) cbTipo.getSelectedItem();
+//        filtroTipo(dado);
+        filtrarConsultas();
 
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
@@ -373,7 +374,8 @@ public class Janela extends javax.swing.JFrame {
         txtNome.setText("");
         txtPrinAmeaca.setText("");
         cbUf.setSelectedItem(0);
-        jTable1.setVisible(false);
+//        jTable1.setVisible(false);
+        filtroTudo();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnSincActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSincActionPerformed
@@ -389,40 +391,6 @@ public class Janela extends javax.swing.JFrame {
     private void cbUfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cbUfFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_cbUfFocusLost
-
-    private void filtroTipo(String valor) {
-        if (valor != "Selecione") {
-            try {
-                Query especiesReffilter = FirebaseDatabase.getInstance().getReference().child("base").
-                        orderByChild("faunaFlora").equalTo(valor);
-
-                especiesReffilter.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        lista.clear();
-
-                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                            Model dados = ds.getValue(Model.class);
-                            lista.add(dados);
-                        }
-                        tabela = new TableConsultas(lista, colunas);
-                        jTable1.setModel(tabela);
-                        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError e) {
-                        JOptionPane.showMessageDialog(null, "Consulta Cancelada \n" + e.getMessage());
-                    }
-                });
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "Erro na Consulta\n" + e.getMessage());
-            }
-        } else {
-            //filtrarConsultas();
-            filtroTudo();
-        }
-    }
 
     private void filtroTudo() {
         try {
@@ -467,33 +435,59 @@ public class Janela extends javax.swing.JFrame {
 
         for (int i = 0; i < lista.size(); i++) {
             teste = false;
-            if (lista.get(i).getFaunaFlora().trim().toLowerCase().equals(faunaFlora)) {
-                teste = true;
+            if (!faunaFlora.equals("Selecione")) {
+                if (lista.get(i).getFaunaFlora().equals(faunaFlora)) {
+                    teste = true;
+                }
             }
-            if (lista.get(i).getGrupo().trim().toLowerCase().equals(grupo)) {
-                teste = true;
+            if (!grupo.equals("Selecione")) {
+                if (lista.get(i).getGrupo().equals(grupo)) {
+                    teste = true;
+                }
             }
-            if (lista.get(i).getFamilia().trim().toLowerCase().equals(familia)) {
-                teste = true;
+
+            if (!familia.equals("Selecione")) {
+                if (lista.get(i).getFamilia().equals(familia)) {
+                    teste = true;
+                }
             }
-            if (lista.get(i).getEspecie().trim().toLowerCase().equals(especie)) {
-                teste = true;
+
+            if (!especie.equals("Selecione")) {
+                if (lista.get(i).getEspecie().trim().toLowerCase().equals(especie)) {
+                    teste = true;
+                }
             }
-            if (lista.get(i).getBioma().trim().toLowerCase().equals(bioma)) {
-                teste = true;
+
+            if (!bioma.equals("")) {
+                if (lista.get(i).getBioma().trim().toLowerCase().equals(bioma)) {
+                    teste = true;
+                }
             }
-            if (lista.get(i).getCatAmeaca().trim().toLowerCase().equals(catAmeaca)) {
-                teste = true;
+
+            if (!catAmeaca.equals("")) {
+                if (lista.get(i).getCatAmeaca().trim().toLowerCase().equals(catAmeaca)) {
+                    teste = true;
+                }
             }
-            if (lista.get(i).getPrincAmeaca().trim().toLowerCase().equals(princAmeaca)) {
-                teste = true;
+
+            if (!princAmeaca.equals("")) {
+                if (lista.get(i).getPrincAmeaca().trim().toLowerCase().equals(princAmeaca)) {
+                    teste = true;
+                }
             }
-            if (lista.get(i).getNomeComum().trim().toLowerCase().equals(nome)) {
-                teste = true;
+
+            if (!nome.equals("")) {
+                if (lista.get(i).getNomeComum().trim().toLowerCase().equals(nome)) {
+                    teste = true;
+                }
             }
-            if (lista.get(i).getEstado().trim().toLowerCase().equals(uf)) {
-                teste = true;
+
+            if (!uf.equals("Selecione")) {
+                if (lista.get(i).getEstado().equals(uf)) {
+                    teste = true;
+                }
             }
+
             if (teste) {
                 pesquisaLista.add(lista.get(i));
             }
