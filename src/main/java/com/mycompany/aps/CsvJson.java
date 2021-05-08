@@ -20,7 +20,7 @@ public class CsvJson {
     }
 
     private final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private final DatabaseReference especiesRef = database.getReference().child("base");
+    private final DatabaseReference bancoReferencia = database.getReference().child("base");
 
     public void csvJson() throws MalformedURLException {
         URL url;        
@@ -63,7 +63,7 @@ public class CsvJson {
                 base.put(numero.toString(), especie);
 
             }
-            especiesRef.setValueAsync(base);
+            bancoReferencia.setValueAsync(base);
         } catch (IOException err) {            
         }
     }
